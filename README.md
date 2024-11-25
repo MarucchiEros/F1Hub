@@ -29,7 +29,7 @@ Per MongoDB, seguire questi passaggi:
 1. Creare un database chiamato `F1`.  
 2. Creare manualmente una collection chiamata `mongoDB`.  
 
-L'applicativo, al momento della sincronizzazione con gli utenti, creerà automaticamente le altre collection necessarie.
+L'applicativo, al momento della sincronizzazione con gli utenti dal database mysql, creerà automaticamente le altre collection necessarie.
 
 ## Contatti
 
