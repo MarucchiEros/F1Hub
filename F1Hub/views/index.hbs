@@ -1,0 +1,348 @@
+{{> header}}
+
+<div id="page-warning">La pagina non è disponibile su schermi con larghezza inferiore a 1000px.</div>
+
+<!--
+<div id="error-popup">
+    <p id="error-message">Si è verificato un errore. Per favore, riprova.</p>
+    <button class="close-btn" onclick="closeErrorPopup()">Chiudi</button>
+</div>-->
+
+
+<main>
+
+
+    <div class="admin-section" id="admin-section">
+        {{#if isAdmin}}
+        <div class="nav-links">
+            <a href="#" class="tab-link selected" data-tab="scuderie">Scuderie</a>
+            <a href="#" class="tab-link" data-tab="piste">Piste</a>
+            <a href="#" class="tab-link" data-tab="piloti">Piloti</a>
+            <a href="#" class="tab-link" data-tab="utenti">Utenti</a>
+        </div>
+
+        <div class="form-section" id="form-section">
+            <div id="scuderie-form" class="form-data" style="display:none;">
+                <h2>Gestione Scuderie</h2>
+                <form action="/scuderie/add" method="POST" id="add-scuderia-form">
+                    <input type="text" name="nome" placeholder="Nome" required>
+                    <input type="text" name="sede" placeholder="Sede" required>
+                    <input type="number" name="anno_fondazione" placeholder="Anno Fondazione" required>
+                    <button type="submit" class="ri-add-circle-line"></button>
+                </form>
+            </div>
+
+            <div id="piste-form" class="form-data" style="display:none;">
+                <h2>Gestione Piste</h2>
+                <form action="/piste/add" method="POST" id="add-pista-form">
+                    <input type="text" name="paese" placeholder="Paese" required>
+                    <input type="number" name="lunghezza" placeholder="Lunghezza (m)" required>
+                    <input type="number" name="anno_inaugurazione" placeholder="Anno Inaugurazione" required>
+                    <input type="number" name="numero_curve" placeholder="Numero Curve" required>
+                    <button type="submit" class="ri-add-circle-line"></button>
+                </form>
+            </div>
+
+            <div id="piloti-form" class="form-data" style="display:none;">
+                <h2>Gestione Piloti</h2>
+                <form action="/piloti/add" method="POST" id="add-pilota-form">
+                    <input type="text" name="nome" placeholder="Nome" required>
+                    <input type="text" name="cognome" placeholder="Cognome" required>
+                    <input type="number" name="numero" placeholder="Numero" required>
+                    <select name="scuderia_id" required>
+                        <option value="">Seleziona Scuderia</option>
+                        {{#each scuderie}}
+                        <option value="{{this.id}}">{{this.nome}}</option>
+                        {{/each}}
+                    </select>
+                    <input type="number" name="mondiali_vinti" placeholder="Mondiali Vinti">
+                    <input type="date" name="data_nascita" placeholder="Data di Nascita" required>
+                    <input type="text" name="nazionalità" placeholder="Nazionalità" required>
+                    <button type="submit" class="ri-add-circle-line"></button>
+                </form>
+            </div>
+
+            {{#if isAdmin}}
+            <div id="utenti-form" class="form-data" style="display:none;">
+                <h2>Gestione Utenti</h2>
+                <form action="/utenti/add" method="POST" id="add-utente-form">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" name="password" placeholder="Password" required>
+                    <select name="is_admin" required>
+                        <option value="0">Utente</option>
+                        <option value="1">Admin</option>
+                    </select>
+                    <button type="submit" class="ri-add-circle-line"></button>
+                </form>
+            </div>
+            {{/if}}
+        </div>
+
+        <!-- Scuderie -->
+        <div class="data-section" id="data-section">
+            <div id="scuderie-data" class="data-tab" style="display:none;">
+                <h3>Scuderie</h3>
+                <table id="scuderie-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="nome">Nome</th>
+                            <th class="sortable" data-column="sede">Sede</th>
+                            <th class="sortable" data-column="anno_fondazione">Anno Fondazione</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each scuderie}}
+                        <tr data-id="{{this.id}}">
+                            <td class="editable" data-column="nome">{{this.nome}}</td>
+                            <td class="editable" data-column="sede">{{this.sede}}</td>
+                            <td class="editable" data-column="anno_fondazione">{{this.anno_fondazione}}</td>
+                            <td>
+                                <button class="ri-pencil-line icon edit-btn" data-id="{{this.id}}"></button>
+                                <button class="ri-save-line icon save-btn" style="display:none;"
+                                    data-id="{{this.id}}"></button>
+                                <button class="ri-delete-bin-line icon delete-btn" data-id="{{this.id}}"
+                                    data-type="scuderia"></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Piste -->
+            <div id="piste-data" class="data-tab" style="display:none;">
+                <h3>Piste</h3>
+                <table id="piste-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="paese">Paese</th>
+                            <th class="sortable" data-column="lunghezza">Lunghezza (m)</th>
+                            <th class="sortable" data-column="anno_inaugurazione">Anno Inaugurazione</th>
+                            <th class="sortable" data-column="numero_curve">Numero Curve</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each piste}}
+                        <tr data-id="{{this.id}}">
+                            <td class="editable" data-column="paese">{{this.paese}}</td>
+                            <td class="editable" data-column="lunghezza">{{this.lunghezza}}</td>
+                            <td class="editable" data-column="anno_inaugurazione">{{this.anno_inaugurazione}}</td>
+                            <td class="editable" data-column="numero_curve">{{this.numero_curve}}</td>
+                            <td>
+                                <button class="ri-pencil-line icon edit-btn" data-id="{{this.id}}"></button>
+                                <button class="ri-save-line icon save-btn" style="display:none;"
+                                    data-id="{{this.id}}"></button>
+                                <button class="ri-delete-bin-line icon delete-btn" data-id="{{this.id}}"
+                                    data-type="piste"></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Piloti -->
+            <div id="piloti-data" class="data-tab" style="display:none;">
+                <h3>Piloti</h3>
+                <table id="piloti-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="nome">Nome</th>
+                            <th class="sortable" data-column="cognome">Cognome</th>
+                            <th class="sortable" data-column="numero">Numero</th>
+                            <th class="sortable" data-column="mondiali_vinti">Mondiali Vinti</th>
+                            <th class="sortable" data-column="data_nascita">Data di Nascita</th>
+                            <th class="sortable" data-column="nazionalità">Nazionalità</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each piloti}}
+                        <tr data-id="{{this.id}}">
+                            <td class="editable" data-column="nome">{{this.nome}}</td>
+                            <td class="editable" data-column="cognome">{{this.cognome}}</td>
+                            <td class="editable" data-column="numero">{{this.numero}}</td>
+                            <td class="editable" data-column="mondiali_vinti">{{this.mondiali_vinti}}</td>
+                            <td class="editable" data-column="data_nascita">{{this.data_nascita}}</td>
+                            <td class="editable" data-column="nazionalità">{{this.nazionalità}}</td>
+                            <td>
+                                <button class="ri-pencil-line icon edit-btn" data-id="{{this.id}}"></button>
+                                <button class="ri-save-line icon save-btn" style="display:none;"
+                                    data-id="{{this.id}}"></button>
+                                <button class="ri-delete-bin-line icon delete-btn" data-id="{{this.id}}"
+                                    data-type="pilota"></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Utenti -->
+            {{#if isAdmin}}
+            <div id="utenti-data" class="data-tab" style="display:none;">
+                <h3>Utenti</h3>
+                <table id="utenti-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="username">Username</th>
+                            <th class="sortable" data-column="tipo">Tipo</th>
+                            <th>Azioni</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each utenti}}
+                        <tr data-id="{{this.id}}">
+                            <td class="editable" data-column="username">{{this.username}}</td>
+                            <td class="editable" data-column="tipo">{{this.tipo}}</td>
+                            <td>
+                                <button class="ri-pencil-line icon edit-btn" data-id="{{this.id}}"></button>
+                                <button class="ri-save-line icon save-btn" style="display:none;"
+                                    data-id="{{this.id}}"></button>
+                                <button class="ri-delete-bin-line icon delete-btn" data-id="{{this.id}}"
+                                    data-type="utente"></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+            {{/if}}
+        </div>
+
+        <!-- PARTE USER-->
+
+        {{else}}
+        <div class="nav-links">
+            <a href="#" class="tab-link selected" data-tab="scuderie">Scuderie</a>
+            <a href="#" class="tab-link" data-tab="piste">Piste</a>
+            <a href="#" class="tab-link" data-tab="piloti">Piloti</a>
+            <a href="#" class="tab-link" data-tab="preferiti">Preferiti</a>
+        </div>
+
+        <div class="data-section" id="data-section">
+            <div id="scuderie-data" class="data-tab" style="display:none;">
+                <h3>Scuderie</h3>
+                <table id="scuderie-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="nome">Nome</th>
+                            <th class="sortable" data-column="sede">Sede</th>
+                            <th class="sortable" data-column="anno_fondazione">Anno Fondazione</th>
+                            <th>Preferiti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each scuderie}}
+                        <tr>
+                            <td>{{this.nome}}</td>
+                            <td>{{this.sede}}</td>
+                            <td>{{this.anno_fondazione}}</td>
+                            <td>
+                                <button class="add-to-favorites ri-heart-add-line" data-id="{{this.id}}"
+                                    data-type="scuderia"></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="piste-data" class="data-tab" style="display:none;">
+                <h3>Piste</h3>
+                <table id="piste-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="paese">Paese</th>
+                            <th class="sortable" data-column="lunghezza">Lunghezza (m)</th>
+                            <th class="sortable" data-column="anno_inaugurazione">Anno Inaugurazione</th>
+                            <th class="sortable" data-column="numero_curve">Numero Curve</th>
+                            <th>Preferiti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each piste}}
+                        <tr>
+                            <td>{{this.paese}}</td>
+                            <td>{{this.lunghezza}}</td>
+                            <td>{{this.anno_inaugurazione}}</td>
+                            <td>{{this.numero_curve}}</td>
+                            <td>
+                                <button class="add-to-favorites ri-heart-add-line" data-id="{{this.id}}"
+                                    data-type="pista"></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="piloti-data" class="data-tab" style="display:none;">
+                <h3>Piloti</h3>
+                <table id="piloti-table">
+                    <thead>
+                        <tr>
+                            <th class="sortable" data-column="nome">Nome</th>
+                            <th class="sortable" data-column="cognome">Cognome</th>
+                            <th class="sortable" data-column="numero">Numero</th>
+                            <th class="sortable" data-column="mondiali_vinti">Mondiali Vinti</th>
+                            <th class="sortable" data-column="data_nascita">Data di Nascita</th>
+                            <th class="sortable" data-column="nazionalità">Nazionalità</th>
+                            <th>Preferiti</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each piloti}}
+                        <tr>
+                            <td>{{this.nome}}</td>
+                            <td>{{this.cognome}}</td>
+                            <td>{{this.numero}}</td>
+                            <td>{{this.mondiali_vinti}}</td>
+                            <td>{{this.data_nascita}}</td>
+                            <td>{{this.nazionalità}}</td>
+                            <td>
+                                <button class="add-to-favorites ri-heart-add-line" data-id="{{this.id}}"
+                                    data-type="pilota"></button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="preferiti-data" class="data-tab" style="display:none;">
+                <h3>I tuoi Preferiti</h3>
+                <table id="preferiti-table">
+                    <thead>
+                        <tr>
+                            <th>Tipo</th>
+                            <th>Nome</th>
+                            <th>Dettagli</th>
+                            <th>Rimuovi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="preferiti-list">
+                        {{#each preferiti}}
+                        <tr>
+                            <td>{{this.tipo}}</td>
+                            <td>{{this.nome}}</td>
+                            <td>{{this.dettagli}}</td>
+                            <td>
+                                <button class="remove-from-favorites ri-heart-remove-line" data-id="{{this.id}}"
+                                    data-type="{{this.tipo}}">Rimuovi</button>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {{/if}}
+
+</main>
+
+{{> footer year=2024}}

@@ -1,0 +1,396 @@
+@import '~font-awesome/css/font-awesome.css';
+
+/* Stile per i form */
+.form-section {
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 20px auto;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+}
+
+/* Titoli dei form */
+.form-section h2 {
+    color: #b90000;
+    margin-bottom: 20px;
+}
+
+/* Stile per i campi di input e selezione */
+.form-section input[type="text"],
+.form-section input[type="number"],
+.form-section input[type="date"],
+.form-section select {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+/* Cambia il colore del bordo quando il campo è in focus */
+.form-section input[type="text"]:focus,
+.form-section input[type="number"]:focus,
+.form-section input[type="date"]:focus,
+.form-section select:focus {
+    border-color: #b90000;
+    outline: none;
+}
+
+/* Stile per i pulsanti */
+.form-section button {
+    background-color: #b90000;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* Cambia il colore del pulsante al passaggio del mouse */
+.form-section button:hover {
+    background-color: #a30000;
+}
+
+/* Stile per le sezioni di gestione dati */
+.data-section {
+    margin: 20px auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+/* Stile per le tabelle */
+table {
+    width: calc(100% - 40px); /* Larghezza al 100% meno padding */
+    border-collapse: collapse;
+    margin: 20px auto; /* Centro la tabella */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px; /* Angoli arrotondati */
+    overflow: hidden; /* Nasconde gli angoli arrotondati */
+}
+
+/* Intestazione della tabella */
+th {
+    background-color: #b90000;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    text-align: center;
+}
+
+.title-table {
+    text-align: center;
+}
+
+/* Righe della tabella */
+td {
+    padding: 12px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    font-size: 14px;
+}
+
+/* Righe pari */
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+/* Righe al passaggio del mouse */
+tr:hover {
+    background-color: #ddd;
+}
+
+/* Stile per il titolo delle tabelle */
+h2 {
+    color: #333;
+    margin-top: 40px;
+}
+
+/* Stile per i pulsanti delle azioni */
+button {
+    background-color: #b90000;
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+/* Cambia il colore del pulsante al passaggio del mouse */
+button:hover {
+    background-color: #a30000;
+}
+
+.icon {
+    width: 40px;
+    height: 40px;
+    border-radius: .5rem;
+}
+
+.command-cell {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+
+.nav-links {
+    gap: 5px;
+    width: 480px;
+    margin: 20px auto;
+    padding: 7px;
+    display: flex;
+    align-items: center;
+    background: #efefef;
+    justify-content: space-between;
+    border-radius: 1rem;
+}
+
+.nav-links a {
+    text-decoration: none;
+    width: 100%;
+    height: 100%;
+    color: #000;
+    text-align: center;
+    font-size: 20px;
+    border-radius: calc(1rem - 7px);
+}
+
+.nav-links a.selected {
+    background: #fff;
+}
+
+.logo {
+	position: absolute;
+	width: 80px;
+	height: 80px;
+}
+
+body {
+    padding-bottom: 100px;
+}
+
+.username {
+    margin-right: 20px;
+}
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+
+/* Stile per le celle modificabili durante la modifica */
+.editable[contenteditable="true"] {
+    background-color: #f0f8ff;  
+    border: 2px dashed #9b0000;  
+    padding: 5px;  
+    color: #333; 
+}
+
+
+.editing-row {
+    background-color: #f9f9f9a6;  
+}
+
+
+.edit-btn {
+    cursor: pointer;
+}
+
+.save-btn {
+    cursor: pointer;
+}
+
+.save-btn[style*="display: none"] {
+    display: none !important;
+}
+
+.edit-btn[style*="display: none"] {
+    display: none !important;
+}
+
+
+
+/* Stili generali per i pulsanti */
+button {
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.1s ease-in-out;
+  }
+  
+  /* Pulsante Aggiungi ai preferiti */
+  .add-to-favorites {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+  }
+  
+  .add-to-favorites:hover {
+    background-color: #45a049;
+  }
+  
+  .add-to-favorites:focus {
+    outline: none;
+  }
+  
+  .add-to-favorites:active {
+    background-color: #388e3c; /* Colore più scuro quando premuto */
+    transform: scale(0.98); /* Effetto di riduzione per il tasto premuto */
+  }
+  
+  /* Pulsante di rimozione dai preferiti */
+  .remove-from-favorites {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    font-size: 14px;
+  }
+  
+  .remove-from-favorites:hover {
+    background-color: #e53935;
+  }
+  
+  .remove-from-favorites:focus {
+    outline: none;
+  }
+  
+  .remove-from-favorites:active {
+    background-color: #c62828; /* Colore più scuro quando premuto */
+    transform: scale(0.98); /* Effetto di riduzione per il tasto premuto */
+  }
+  
+  /* Stile per la tabella dei preferiti */
+  #preferiti-data {
+    padding: 15px;
+  }
+  
+  #preferiti-list {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+  }
+  
+  #preferiti-list td,
+  #preferiti-list th {
+    padding: 10px;
+    border: 1px solid #ddd;
+  }
+  
+  #preferiti-list tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  #preferiti-list th {
+    background-color: #4CAF50;
+    color: white;
+  }
+  
+  /* Stile per le righe della tabella dei preferiti */
+  #preferiti-list tr {
+    transition: background-color 0.3s;
+  }
+  
+  #preferiti-list tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Stili per i tasti nelle righe della tabella dei preferiti */
+  #preferiti-list .remove-from-favorites {
+    background-color: #f44336;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  
+  #preferiti-list .remove-from-favorites:hover {
+    background-color: #e53935;
+  }
+  
+  #preferiti-list .remove-from-favorites:focus {
+    outline: none;
+  }
+  
+  #preferiti-list .remove-from-favorites:active {
+    background-color: #c62828;
+    transform: scale(0.98); /* Riduzione per il tasto premuto */
+  }
+
+
+
+  /* Stile per il messaggio di avviso */
+#page-warning {
+    display: none; /* Nascondi il messaggio di default */
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #ff0000;
+    color: #000;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Media query per schermi più piccoli di 1000px */
+@media (max-width: 1000px) {
+
+    #page-warning {
+        display: block; /* Mostra il messaggio su schermi stretti */
+    }
+
+    main *, .navbar, footer {
+        display: none;
+    }
+}
+
+  
+/* Stile per il popup di errore */
+#error-popup {
+    display: none; /* Nascondi il popup di default */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centra il popup */
+    background-color: #ff4d4d; /* Colore di sfondo rosso per gli errori */
+    color: white;
+    padding: 20px 30px;
+    border-radius: 10px;
+    font-size: 18px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+    width: 80%; /* Dimensione del popup */
+    max-width: 500px; /* Dimensione massima */
+    text-align: center;
+}
+
+/* Bottone per chiudere il popup */
+#error-popup .close-btn {
+    background-color: #f44336;
+    color: white;
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* Cambia colore del bottone al passaggio del mouse */
+#error-popup .close-btn:hover {
+    background-color: #e53935;
+}
