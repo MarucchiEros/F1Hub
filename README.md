@@ -1,6 +1,6 @@
 # F1Hub
 
-F1Hub è un progetto sviluppato per il laboratorio di approfondimento di Node.js.  
+F1Hub è un progetto sviluppato per il laboratorio di approfondimento di **Node.js**.  
 L'applicazione è stata creata utilizzando il template engine **HandleBar**.
 
 ## Credenziali di accesso
@@ -16,7 +16,7 @@ Sono disponibili due account predefiniti per l'accesso all'applicazione:
   Password: `user`
 
 In alternativa, è possibile effettuare il login con un account scolastico.  
-Per registrarsi, utilizzare il proprio nome utente e scegliere una password.
+Per registrarsi, sarà obbligatorio utilizzare il proprio nome utente e scegliere una password.
 
 ## Database
 
